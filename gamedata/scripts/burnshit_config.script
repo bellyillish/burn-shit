@@ -1,0 +1,24 @@
+-- "whoosh" sound when burning shit
+burnSound = sound_object("burnshit\\fire_whoosh")
+
+-- max (sqaured) meters away from fire to burn shit via menu
+maxMenuRange = 10
+
+-- max (sqaured) meters away from fire to burn shit via drag and drop
+maxDropRange = 4
+
+-- volume when burning one thing
+baseVolume = 0.36
+
+-- how much louder the burn sound gets for each additional item
+volumePerItem = 0.05
+
+-- max volume when burning many things at once
+maxVolume = 0.76
+
+-- additional items (by section name) to make burnable/not burnable
+-- overrides canBurnQuestItems and canBurnNonTradeableItems
+burnableItemOverrides = {
+  -- example_section = false,
+  -- another_section = true,
+}

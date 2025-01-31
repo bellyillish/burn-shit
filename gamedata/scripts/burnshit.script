@@ -1,0 +1,135 @@
+local Config  = burnshit_config
+local Functor = custom_functor_autoinject
+
+
+function refreshInventory()
+	local inventory = GetActorMenu()
+
+  if inventory then
+    inventory:UnHighlight_All()
+    inventory:UpdateItems()
+  end
+end
+
+
+function isBurnable(item, _, _, isDragDrop)
+  if not ui_mcm.get("burnshit/useMenu") then
+    return false
+  end
+
+  local parent = item:parent()
+
+  if not parent or parent:id() ~= db.actor:id() then
+    return false
+  end
+
+  if not bind_campfire.get_nearby_campfire(isDragDrop and Config.maxDropRange or Config.maxMenuRange) then
+    return false
+  end
+
+  local override = Config.burnableItemOverrides[item:section()]
+  if override ~= nil then
+    return override
+  end
+
+  local burnQuestItems   = ui_mcm.get("burnshit/burnQuestItems")
+  local burnUntradeables = ui_mcm.get("burnshit/burnUntradeables")
+
+  if not burnQuestItems and SYS_GetParam(1, item:section(), "quest_item") == true then
+    return false
+  end
+
+  if not burnUntradeables and SYS_GetParam(1, item:section(), "can_trade") == false then
+    return false
+  end
+
+  return true
+end
+
+
+function isBurnableAll(item)
+  if not ui_mcm.get("burnshit/useMenu") then
+    return false
+  end
+
+  if ui_mcm.get("burnshit/burnAll") == "never" then
+    return false
+  end
+
+  if not isBurnable(item) then
+    return false
+  end
+
+  if ui_mcm.get("burnshit/burnAll") == "always" then
+    return true
+  end
+
+  local itemCount = 0
+
+  db.actor:iterate_inventory(function(owner, otherItem)
+    if item:section() == otherItem:section() then
+      itemCount = itemCount + 1
+      if itemCount > 1 then
+        return true
+      end
+    end
+  end, db.actor)
+
+  return itemCount > 1
+end
+
+
+function burnItem(item)
+  alife_release(item)
+  Config.burnSound:play_no_feedback(db.actor, 0, 0, db.actor:position(), Config.baseVolume, 1.0)
+  refreshInventory()
+end
+
+
+function burnItemsAll(item)
+  local itemCount = 0
+
+  db.actor:iterate_inventory(function(owner, otherItem)
+    if item:section() == otherItem:section() then
+      alife_release(otherItem)
+      itemCount = itemCount + 1
+    end
+  end, db.actor)
+
+  local volume = math.min(Config.baseVolume + (Config.volumePerItem * (itemCount - 1)), Config.maxVolume)
+  Config.burnSound:play_no_feedback(db.actor, 0, 0, db.actor:position(), volume, 1.0)
+
+  refreshInventory()
+end
+
+
+Functor.add_functor("burnshit_burn",
+  isBurnable,
+  function() return game.translate_string("st_burn") end,
+  nil,
+  burnItem
+)
+
+
+Functor.add_functor("burnshit_burn_all",
+  isBurnableAll,
+  function() return game.translate_string("st_burn_all") end,
+  nil,
+  burnItemsAll
+)
+
+
+function onItemDrop(item)
+  if not ui_mcm.get("burnshit/useDragDrop") then
+    return
+  end
+
+  if isBurnable(item, _, _, true) then
+    burnItem(item)
+  end
+end
+
+
+function on_game_start()
+  RegisterScriptCallback("actor_on_item_drop", onItemDrop)
+end
