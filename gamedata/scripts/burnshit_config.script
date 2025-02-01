@@ -2,10 +2,10 @@
 burnSound = sound_object("burnshit\\fire_whoosh")
 
 -- max (sqaured) meters away from fire to burn shit via menu
-maxMenuRange = 10
+maxMenuRange = 3.2
 
 -- max (sqaured) meters away from fire to burn shit via drag and drop
-maxDropRange = 4
+maxDropRange = 1.6
 
 -- volume when burning one thing
 baseVolume = 0.36

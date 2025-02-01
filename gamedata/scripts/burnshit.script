@@ -12,18 +12,42 @@ function refreshInventory()
 end
 
 
-function isBurnable(item, _, _, isDragDrop)
-  if not ui_mcm.get("burnshit/useMenu") then
-    return false
+function getNearbyLitCampfire(pos, radius)
+  radius = radius or 3.2
+  local campfire
+
+  for id, binders in pairs(bind_campfire.campfires_all) do
+    local dist = pos:distance_to(binders.object:position())
+
+    if dist <= radius and binders.campfire:is_on() then
+      return {
+        id       = id,
+        distance = dist,
+        object   = binders.object,
+        campfire = binders.campfire,
+      }
+    end
+  end
+end
+
+
+function isBurnable(item, radius)
+  local inventory = GetActorMenu()
+  if not (inventory and inventory:IsShown()) then
+    return
+  end
+
+  local se = alife_object(item:id())
+  if not se then
+    return
   end
 
   local parent = item:parent()
-
   if not parent or parent:id() ~= db.actor:id() then
     return false
   end
 
-  if not bind_campfire.get_nearby_campfire(isDragDrop and Config.maxDropRange or Config.maxMenuRange) then
+  if not getNearbyLitCampfire(db.actor:position(), radius or 3.2) then
     return false
   end
 
@@ -47,7 +71,7 @@ function isBurnable(item, _, _, isDragDrop)
 end
 
 
-function isBurnableAll(item)
+function isBurnableAll(item, radius)
   if not ui_mcm.get("burnshit/useMenu") then
     return false
   end
@@ -56,7 +80,7 @@ function isBurnableAll(item)
     return false
   end
 
-  if not isBurnable(item) then
+  if not isBurnable(item, radius) then
     return false
   end
 
@@ -104,27 +128,35 @@ end
 
 
 Functor.add_functor("burnshit_burn",
-  isBurnable,
-  function() return game.translate_string("st_burn") end,
+  function(item)
+    return ui_mcm.get("burnshit/useMenu")
+      and isBurnable(item, Config.maxMenuRange)
+      or  false
+  end,
+  function()
+    return game.translate_string("st_burn")
+  end,
   nil,
   burnItem
 )
 
 
 Functor.add_functor("burnshit_burn_all",
-  isBurnableAll,
-  function() return game.translate_string("st_burn_all") end,
+  function(item)
+    return ui_mcm.get("burnshit/useMenu")
+      and isBurnableAll(item, Config.maxMenuRange)
+      or  false
+  end,
+  function()
+    return game.translate_string("st_burn_all")
+  end,
   nil,
   burnItemsAll
 )
 
 
 function onItemDrop(item)
-  if not ui_mcm.get("burnshit/useDragDrop") then
-    return
-  end
-
-  if isBurnable(item, _, _, true) then
+  if ui_mcm.get("burnshit/useDragDrop") and isBurnable(item, Config.maxDropRange) then
     burnItem(item)
   end
 end
