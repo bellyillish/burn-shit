@@ -45,9 +45,9 @@ function on_mcm_load()
         val  = 0,
         def  = "always",
         content = {
-          {"never", "never"},
-          {"always", "always"},
-          {"multiple", "multiple"},
+          {"never", "burnshit_never"},
+          {"always", "burnshit_always"},
+          {"multiple", "burnshit_multiple"},
         }
       },
     }

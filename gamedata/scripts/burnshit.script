@@ -2,6 +2,9 @@ local Config  = burnshit_config
 local Functor = custom_functor_autoinject
 
 
+local USED_ITEMS = {}
+
+
 function refreshInventory()
 	local inventory = GetActorMenu()
 
@@ -32,6 +35,11 @@ end
 
 
 function isBurnable(item, radius)
+  if USED_ITEMS[item:id()] then
+    USED_ITEMS[item:id()] = nil
+    return false
+  end
+
   local inventory = GetActorMenu()
   if not (inventory and inventory:IsShown()) then
     return
@@ -134,7 +142,7 @@ Functor.add_functor("burnshit_burn",
       or  false
   end,
   function()
-    return game.translate_string("st_burn")
+    return game.translate_string("st_burnshit_burn")
   end,
   nil,
   burnItem
@@ -148,11 +156,18 @@ Functor.add_functor("burnshit_burn_all",
       or  false
   end,
   function()
-    return game.translate_string("st_burn_all")
+    return game.translate_string("st_burnshit_burn_all")
   end,
   nil,
   burnItemsAll
 )
+
+
+function onItemUse(item)
+  if item:get_remaining_uses() == 0 then
+    USED_ITEMS[item:id()] = true
+  end
+end
 
 
 function onItemDrop(item)
@@ -163,5 +178,6 @@ end
 
 
 function on_game_start()
+  RegisterScriptCallback("actor_on_item_use", onItemUse)
   RegisterScriptCallback("actor_on_item_drop", onItemDrop)
 end

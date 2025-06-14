@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <string_table>
-  <string id="st_burn">
+  <string id="st_burnshit_burn">
     <text>burn</text>
   </string>
 
-  <string id="st_burn_all">
+  <string id="st_burnshit_burn_all">
     <text>burn all</text>
   </string>
 
@@ -52,15 +52,15 @@
     <text>Choose to show a "burn all" context menu item always, never, or only when right clicking multiple-item stacks.</text>
   </string>
 
-  <string id="ui_mcm_lst_never">
+  <string id="ui_mcm_lst_burnshit_never">
     <text>Never</text>
   </string>
 
-  <string id="ui_mcm_lst_always">
+  <string id="ui_mcm_lst_burnshit_always">
     <text>Always</text>
   </string>
 
-  <string id="ui_mcm_lst_multiple">
+  <string id="ui_mcm_lst_burnshit_multiple">
     <text>Only for Multiple Items</text>
   </string>
 </string_table>

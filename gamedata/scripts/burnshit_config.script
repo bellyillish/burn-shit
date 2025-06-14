@@ -8,13 +8,13 @@ maxMenuRange = 3.2
 maxDropRange = 1.6
 
 -- volume when burning one thing
-baseVolume = 0.36
+baseVolume = 0.48
 
 -- how much louder the burn sound gets for each additional item
-volumePerItem = 0.05
+volumePerItem = 0.04
 
 -- max volume when burning many things at once
-maxVolume = 0.76
+maxVolume = 0.88
 
 -- additional items (by section name) to make burnable/not burnable
 -- overrides canBurnQuestItems and canBurnNonTradeableItems
