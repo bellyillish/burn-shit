@@ -12,22 +12,6 @@
     <text>Burn Shit</text>
   </string>
 
-  <string id="ui_mcm_burnshit_useMenu">
-    <text>Burn Shit through the Context Menu</text>
-  </string>
-
-  <string id="ui_mcm_burnshit_useMenu_desc">
-    <text>Show "burn" and "burn all" items in the inventory's context menu. You need to be near (within 3m of) a fire to do this.</text>
-  </string>
-
-  <string id="ui_mcm_burnshit_useDragDrop">
-    <text>Burn Shit by Dragging and Dropping</text>
-  </string>
-
-  <string id="ui_mcm_burnshit_useDragDrop_desc">
-    <text>Burn items you drag and drop from the inventory onto a campfire. You need to be next to (within 2m of) a fire to do this.</text>
-  </string>
-
   <string id="ui_mcm_burnshit_burnQuestItems">
     <text>Allow Burning of Quest Items</text>
   </string>
@@ -41,14 +25,18 @@
   </string>
 
   <string id="ui_mcm_burnshit_burnUntradeables_desc">
-    <text>Allow burning of items flagged with "can_trade = false". I threw this option in but don't really know if disabling it is useful.</text>
+    <text>Allow burning of items flagged with "can_trade = false".</text>
   </string>
 
-  <string id="ui_mcm_burnshit_burnAll">
+  <string id="ui_mcm_burnshit_override_note">
+    <text>You can also force specific items to be burnable or not burnable by editing burnshit.script directly.</text>
+  </string>
+
+  <string id="ui_mcm_burnshit_showBurnAll">
     <text>Show "Burn All" Button</text>
   </string>
 
-  <string id="ui_mcm_burnshit_burnAll_desc">
+  <string id="ui_mcm_burnshit_showBurnAll_desc">
     <text>Choose to show a "burn all" context menu item always, never, or only when right clicking multiple-item stacks.</text>
   </string>
 
@@ -62,5 +50,37 @@
 
   <string id="ui_mcm_lst_burnshit_multiple">
     <text>Only for Multiple Items</text>
+  </string>
+
+  <string id="ui_mcm_burnshit_menuRange">
+    <text>Menu Range (0 = disable)</text>
+  </string>
+
+  <string id="ui_mcm_burnshit_menuRange_desc">
+    <text>Maximum distance in meters that you can be from a lit campfire for the burn menu options to appear.</text>
+  </string>
+
+  <string id="ui_mcm_burnshit_dragDropRange">
+    <text>Drag and Drop Range (0 = disable)</text>
+  </string>
+
+  <string id="ui_mcm_burnshit_dragDropRange_desc">
+    <text>The maximum distance in meters that you can be from a lit campfire to burn items via drag and drop.</text>
+  </string>
+
+  <string id="ui_mcm_burnshit_minVolume">
+    <text>Base Volume</text>
+  </string>
+
+  <string id="ui_mcm_burnshit_minVolume_desc">
+    <text>The volume of the burning sound when burning only one item.</text>
+  </string>
+
+  <string id="ui_mcm_burnshit_maxVolume">
+    <text>Max Volume (0 = disable)</text>
+  </string>
+
+  <string id="ui_mcm_burnshit_maxVolume_desc">
+    <text>The maximum volume of the burning sound when burning many items. Each item up to 10 adds to the base volume</text>
   </string>
 </string_table>
