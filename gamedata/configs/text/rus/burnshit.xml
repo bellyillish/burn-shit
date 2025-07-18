@@ -29,7 +29,7 @@
   </string>
 
   <string id="ui_mcm_burnshit_override_note">
-    <text>You can also force specific items to be burnable or not burnable by editing burnshit.script directly.</text>
+    <text>Вы также можете принудительно сделать определенные элементы пригодными для записи, напрямую отредактировав файл burnshit.script.</text>
   </string>
 
   <string id="ui_mcm_burnshit_showBurnAll">
@@ -53,34 +53,34 @@
   </string>
 
   <string id="ui_mcm_burnshit_menuRange">
-    <text>Menu Range (0 = disable)</text>
+    <text>Дальность меню (0 = выключено)</text>
   </string>
 
   <string id="ui_mcm_burnshit_menuRange_desc">
-    <text>Maximum distance in meters that you can be from a lit campfire for the burn menu options to appear.</text>
+    <text>Максимальное расстояние в метрах от разожженного костра, на котором могут появиться параметры меню «Гореть».</text>
   </string>
 
   <string id="ui_mcm_burnshit_dragDropRange">
-    <text>Drag and Drop Range (0 = disable)</text>
+    <text>Дальность сжигания (0 = выключено)</text>
   </string>
 
   <string id="ui_mcm_burnshit_dragDropRange_desc">
-    <text>The maximum distance in meters that you can be from a lit campfire to burn items via drag and drop.</text>
+    <text>Максимальное расстояние в метрах, на котором вы можете находиться от разожженного костра, чтобы сжигать предметы путем перетаскивания.</text>
   </string>
 
   <string id="ui_mcm_burnshit_minVolume">
-    <text>Base Volume</text>
+    <text>Громкость</text>
   </string>
 
   <string id="ui_mcm_burnshit_minVolume_desc">
-    <text>The volume of the burning sound when burning only one item.</text>
+    <text>Громкость звука горения при горении только одного предмета.</text>
   </string>
 
   <string id="ui_mcm_burnshit_maxVolume">
-    <text>Max Volume (0 = disable)</text>
+    <text>Максимальная громкость (0 = выключено)</text>
   </string>
 
   <string id="ui_mcm_burnshit_maxVolume_desc">
-    <text>The maximum volume of the burning sound when burning many items. Each item up to 10 adds to the base volume</text>
+    <text>Максимальная громкость звука горения при сжигании большого количества предметов. Каждый предмет (до 10) увеличивает базовую громкость.</text>
   </string>
 </string_table>
